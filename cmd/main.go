@@ -1,3 +1,9 @@
+/*
+ * Author : Ismail Ash Shidiq (https://eulbyvan.netlify.app)
+ * Created on : Fri May 12 2023 12:41:11 AM
+ * Copyright : Ismail Ash Shidiq © 2023. All rights reserved
+ */
+
 package main
 
 import (
