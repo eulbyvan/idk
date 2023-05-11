@@ -1,0 +1,23 @@
+- cmd
+  - main.go
+- internal
+  - app
+    - user.go
+    - profile.go
+  - domain
+    - user.go
+    - profile.go
+    - repository.go
+  - repository
+    - user_repository.go
+    - profile_repository.go
+- api
+  - handlers
+    - user_handler.go
+    - profile_handler.go
+  - middleware
+    - logger.go
+    - authentication.go
+  - router.go
+- pkg
+  - utility.go
