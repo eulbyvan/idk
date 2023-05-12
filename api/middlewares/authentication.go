@@ -11,6 +11,7 @@ import (
 	"strings"
 
 	"github.com/dgrijalva/jwt-go"
+	"github.com/eulbyvan/idk/app/go-user-management/pkg"
 	"github.com/gin-gonic/gin"
 )
 
@@ -37,7 +38,7 @@ func Authentication() gin.HandlerFunc {
 			// Provide your own secret key or verification logic here
 			// You can retrieve the secret key from a config file or environment variable
 			// For example, you can use the same key to sign and verify the token
-			secretKey := "your-secret-key"
+			secretKey := pkg.GetEnv("SECRET_KEY")
 			return []byte(secretKey), nil
 		})
 		if err != nil {
