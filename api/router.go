@@ -8,8 +8,6 @@ package api
 
 import (
 	"database/sql"
-	"fmt"
-	"log"
 
 	"github.com/gin-gonic/gin"
 
@@ -19,22 +17,8 @@ import (
 	"github.com/eulbyvan/idk/app/go-user-management/internal/repository"
 )
 
-func SetupRouter() *gin.Engine {
+func SetupRouter(db *sql.DB) *gin.Engine {
 	r := gin.Default()
-
-	db, err := sql.Open("postgres", fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", "localhost", "5432", "postgres", "postgres", "user_management")) // Initialize your PostgreSQL database connection here
-
-	if err != nil {
-		panic(err)
-	}
-
-	defer func() {
-		if err := recover(); err != nil {
-			log.Fatalln("failed to run the application")
-		} else {
-			db.Close()
-		}
-	}()
 
 	userRepo := repository.NewUserRepository(db)
 	profileRepo := repository.NewProfileRepository(db)

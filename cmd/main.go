@@ -8,16 +8,13 @@ package main
 
 import (
 	"log"
-	"net/http"
 
-	"github.com/eulbyvan/idk/app/go-user-management/api"
+	"github.com/eulbyvan/idk/app/go-user-management/server"
 )
 
 func main() {
-	router := api.SetupRouter()
-
 	// Run the server
-	if err := http.ListenAndServe(":8080", router); err != nil {
-		log.Fatal(err)
+	if err := server.Run(); err != nil {
+		log.Fatalf("Error running the server: %s", err)
 	}
 }
