@@ -4,23 +4,17 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-	"os"
 
-	"github.com/joho/godotenv"
+	"github.com/eulbyvan/idk/app/go-user-management/pkg"
 	_ "github.com/lib/pq"
 )
 
 func InitDB() (*sql.DB, error) {
-	err := godotenv.Load()
-    if err != nil {
-        return nil, err
-    }
-
-	host := os.Getenv("DB_HOST")
-	port := os.Getenv("DB_PORT")
-	user := os.Getenv("DB_USER")
-	password := os.Getenv("DB_PASSWORD")
-	dbName := os.Getenv("DB_NAME")
+	host := pkg.GetEnv("DB_HOST")
+	port := pkg.GetEnv("DB_PORT")
+	user := pkg.GetEnv("DB_USER")
+	password := pkg.GetEnv("DB_PASSWORD")
+	dbName := pkg.GetEnv("DB_NAME")
 
 	connStr := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbName)
 	db, err := sql.Open("postgres", connStr)

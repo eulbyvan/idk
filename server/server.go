@@ -11,6 +11,7 @@ import (
 
 	"github.com/eulbyvan/idk/app/go-user-management/api"
 	"github.com/eulbyvan/idk/app/go-user-management/config"
+	"github.com/eulbyvan/idk/app/go-user-management/pkg"
 )
 
 func Run() error {
@@ -25,8 +26,9 @@ func Run() error {
 	router := api.SetupRouter(db)
 
 	// Start the server
-	log.Println("Server is running on port 8080")
-	if err := router.Run(":8080"); err != nil {
+	serverAddress := pkg.GetEnv("SERVER_ADDRESS")
+	log.Printf("Server is running on address: %s\n", serverAddress)
+	if err := router.Run(serverAddress); err != nil {
 		return err
 	}
 
