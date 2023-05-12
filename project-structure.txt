@@ -21,3 +21,7 @@
   - router.go
 - pkg
   - utility.go
+- config
+  - db_config.go
+- server
+  - server.go
