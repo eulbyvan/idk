@@ -32,4 +32,21 @@ func (r *UserRepository) CreateUser(user *domain.User) error {
 	return nil
 }
 
+func (r *UserRepository) GetByEmail(email string) (*domain.User, error) {
+	query := `
+		SELECT id, name, email, password
+		FROM users
+		WHERE email = $1
+	`
+	user := &domain.User{}
+	err := r.db.QueryRow(query, email).Scan(&user.ID, &user.Name, &user.Email, &user.Password)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, fmt.Errorf("user not found")
+		}
+		return nil, fmt.Errorf("failed to get user by email: %w", err)
+	}
+	return user, nil
+}
+
 // Implement other user repository methods as needed (e.g., GetUserByID, UpdateUser, DeleteUser)

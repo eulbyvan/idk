@@ -29,11 +29,16 @@ func SetupRouter(db *sql.DB) *gin.Engine {
 	userHandler := handlers.NewUserHandler(userService)
 	profileHandler := handlers.NewProfileHandler(profileService)
 
+	authRoutes := r.Group("/auth")
+	{
+		authRoutes.POST("/login", userHandler.Login)
+	}
+
 	// Middlewares
 	r.Use(middlewares.Logger())
-	r.Use(middlewares.Authentication()) // Add the authentication middleware
-
+	
 	apiV1 := r.Group("/api/v1")
+	apiV1.Use(middlewares.Authentication()) // Add the authentication middleware
 
 	// User routes
 	userRoutes := apiV1.Group("/users")

@@ -71,4 +71,17 @@ func (s *UserService) CreateUser(user *domain.User) error {
 	return nil
 }
 
+func (s *UserService) AuthenticateUser(email string, password string) error {
+	// Call the repository method to get the user by email
+	user, err := s.userRepo.GetByEmail(email)
+	if err != nil {
+		return err
+	}
+
+	if password != user.Password {
+		return errors.New("invalid credentials")
+	}
+
+	return nil
+}
 // Implement other user service methods as needed

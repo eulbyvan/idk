@@ -8,6 +8,7 @@ package domain
 
 type UserRepository interface {
 	CreateUser(user *User) error
+	GetByEmail(email string) (*User, error)
 	// Add other user repository methods as needed
 }
 

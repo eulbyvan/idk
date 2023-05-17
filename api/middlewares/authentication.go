@@ -58,8 +58,8 @@ func Authentication() gin.HandlerFunc {
 		// For example, you can extract the user ID from the token and set it in the context
 		// The user information can be retrieved in the handler functions using c.GetString("userID")
 		claims, _ := token.Claims.(jwt.MapClaims)
-		userID := claims["userID"].(string)
-		c.Set("userID", userID)
+		email := claims["email"].(string)
+		c.Set("email", email)
 
 		// Continue to the next middleware or handler
 		c.Next()
