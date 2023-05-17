@@ -7,7 +7,6 @@
 package handlers
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -31,15 +30,12 @@ func NewUserHandler(userService *app.UserService) *UserHandler {
 
 func (h *UserHandler) CreateUser(c *gin.Context) {
 	var user domain.User
-	log.Println("HEREEEE1", user)
 
 	err := c.ShouldBindJSON(&user)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-
-	log.Println("HEREEEE2", user)
 
 	err = h.userService.CreateUser(&user)
 	if err != nil {
